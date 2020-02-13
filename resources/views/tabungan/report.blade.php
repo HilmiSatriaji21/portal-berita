@@ -3,11 +3,6 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                @if (session('massage'))
-                        <div class="alert alert-danger" role="alert">
-                            {{ session('massage') }}
-                        </div>
-                    @endif
                 <div class="card">
                     <div class="card-header"><center><b>Data Tabungan</b></center></div>
 
@@ -23,7 +18,6 @@
                                         <th>Nama Siswa</th>
                                         <th>Nama Kelas</th>
                                         <th>Jumlah Uang Tabungan</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -34,15 +28,6 @@
                                             <td>{{ $data->siswa->nama }}</td>
                                             <td>{{ $data->siswa->kelas }}</td>
                                             <td>{{ $data->jumlah_uang }}</td>
-                                            <td>
-                                                <form action="{{route('tabungan.destroy',$data->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                                <a class="btn btn-info" href=" {{ route('tabungan.show', $data->id) }} ">Show</a>
-                                                <a class="btn btn-warning" href=" {{ route('tabungan.edit', $data->id) }} ">Edit</a>
-                                                <button type="submit" class="btn btn-danger" >Delete</button>
-                                            </td>
-                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

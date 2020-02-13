@@ -4,10 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Siswa;
 use App\Tabungan;
+use App\DB;
 use Illuminate\Http\Request;
 
 class TabunganController extends Controller
 {
+    public function jumlah_tabungan()
+    {
+        $tabungan = Tabungan::with('siswa')
+            ->select(
+                'siswa_id',
+                \DB::raw('sum(tabungans.jumlah_uang)as jumlah_uang')
+            )
+            ->groupBy('siswa_id')
+            ->get();
+        dd($tabungan);
+        return view('tabungan.report', compact('tabungan'))
+            ->with(['massage' => 'Data Tabungan Berhasil Di Simpan']);
+    }
+
+
     public function index()
     {
         $tabungan = Tabungan::with('siswa')->get();
@@ -32,7 +48,8 @@ class TabunganController extends Controller
         $tabungan->siswa_id = $request->siswa_id;
         $tabungan->jumlah_uang = $request->jumlah_uang;
         $tabungan->save();
-        return redirect()->route('tabungan.index');
+        return redirect()->route('tabungan.index')
+        ->with(['massage' => 'Data Tabungan Berhasil Di Simpan']);
     }
 
     /**
@@ -57,7 +74,8 @@ class TabunganController extends Controller
     {
         $siswa = Siswa::all();
         $tabungan = Tabungan::findOrFail($id);
-        return view('tabungan.edit', compact('tabungan', 'siswa'));
+        return view('tabungan.edit', compact('tabungan', 'siswa'))
+        ->with(['massage' => 'Data Tabungan Berhasil Di Edit']);
     }
 
     /**
@@ -73,7 +91,8 @@ class TabunganController extends Controller
         $tabungan->siswa_id = $request->siswa_id;
         $tabungan->jumlah_uang = $request->jumlah_uang;
         $tabungan->save();
-        return redirect()->route('tabungan.index');
+        return redirect()->route('tabungan.index')
+        ->with(['massage' => 'Data Tabungan Berhasil Di Edit']);
     }
 
     /**
@@ -86,6 +105,7 @@ class TabunganController extends Controller
     {
         $tabungan = Tabungan::findOrFail($id);
         $tabungan->delete();
-        return redirect()->route('tabungan.index');
+        return redirect()->route('tabungan.index')
+        ->with(['massage' => 'Data Tabungan Berhasil Di Hapus']);
     }
 }
