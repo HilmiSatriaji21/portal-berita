@@ -16,6 +16,9 @@
                             <label for="">Jumlah Uang</label>
                             <input type="text" class="form-control" value="{{$tabungan->jumlah_uang}}" name="jumlah_uang" readonly>
                             </div>
+                            <a href="{{route("tabungan.index")}}" class="btn btn-outline-dark float-right">
+                                Back
+                            </a>
                         </div>
                 </div>
             </div>
