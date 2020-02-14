@@ -7,13 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Hobi extends Model
 {
     protected $fillable = ['hobi'];
-    public $timestamps = true;
 
-    public function mahasiswa()
+    public function siswa()
     {
-        return $this->belongsToMany('\App\Mahasiswa',
-                                    'mahasiswa_hobi',
-                                    'id_hobi',
-                                    'id_mahasiswa');
+        return $this->belongsToMany('Siswa::class');
     }
 }

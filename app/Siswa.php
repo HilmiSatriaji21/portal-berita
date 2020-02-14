@@ -12,4 +12,9 @@ class Siswa extends Model
     {
         return $this->hasMany('App\Tabungan', 'siswa_id');
     }
+
+    public function hobi()
+    {
+        return $this->belongsToMany('Hobi::class');
+    }
 }

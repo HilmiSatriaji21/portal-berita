@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 @if (session('massage'))
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert alert-dark" role="alert">
                             {{ session('massage') }}
                         </div>
                     @endif

@@ -87,3 +87,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::Resource('daftarsiswa', 'SiswaController');
 Route::get('/tabungan/report', 'TabunganController@jumlah_tabungan');
 Route::Resource('tabungan', 'TabunganController');
+Route::Resource('hobi', 'HobiController');

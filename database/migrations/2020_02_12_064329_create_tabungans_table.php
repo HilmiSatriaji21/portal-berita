@@ -16,7 +16,8 @@ class CreateTabungansTable extends Migration
         Schema::create('tabungans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('siswa_id')->unsigned();
-            $table->foreign('siswa_id')->references('id')->on('siswas');
+            $table->foreign('siswa_id')->references('id')->on('siswas')
+                ->onDelete('cascade');
             $table->integer('jumlah_uang')->default(0);
             $table->timestamps();
         });

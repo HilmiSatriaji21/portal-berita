@@ -15,18 +15,11 @@ class CreateHobisTable extends Migration
     {
         Schema::create('hobis', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('hobi');
-            $table->timestamps();
-        });
+            $table->bigInteger('siswa_id')->unsigned();
+            $table->bigInteger('hobi_id')->unsigned();
 
-        Schema::create('mahasiswa_hobi', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_mahasiswa');
-            $table->foreign('id_mahasiswa')->references('id')
-                ->on('mahasiswas')->onDelete('cascade');
-            $table->unsignedBigInteger('id_hobi');
-            $table->foreign('id_hobi')->references('id')
-                ->on('hobis')->onDelete('cascade');
+            $table->foreign('siswa_id')->references('id')->on('siswas');
+            $table->foreign('hobi_id')->references('id')->on('hobis');
             $table->timestamps();
         });
     }
@@ -39,6 +32,5 @@ class CreateHobisTable extends Migration
     public function down()
     {
         Schema::dropIfExists('hobis');
-        Schema::dropIfExists('mahasiswa_hobi');
     }
 }
